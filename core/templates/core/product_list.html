@@ -1,0 +1,36 @@
+<!-- micro_pos/core/templates/core/product_list.html -->
+{% extends 'core/base.html' %}
+
+{% block title %}Products - Micro POS{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Available Products</h1>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <p class="card-text"><strong>U$ {{ product.price|floatformat:2 }}</strong></p>
+                    <p class="card-text"><small class="text-muted">Stock: {{ product.stock }}</small></p>
+
+                    <form action="{% url 'add_to_cart' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <div class="input-group mb-3">
+                            <input type="number" name="quantity" value="1" min="1" class="form-control" placeholder="Quantity" aria-label="Quantity">
+                            <button class="btn btn-success" type="submit">Add</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p>No products available yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+<!-- micro_pos/core/templates/core/checkout_success.html -->
+{% extends 'core/base.html' %}
+
+{% block title %}Success! - Micro POS{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <h1 class="mb-4 text-success">Purchase Completed Successfully!</h1>
+        <p class="lead">Thank you for your purchase. Your order has been processed.</p>
+        <a href="{% url 'product_list' %}" class="btn btn-primary mt-3">Back to Products</a>
+    </div>
+{% endblock %}
